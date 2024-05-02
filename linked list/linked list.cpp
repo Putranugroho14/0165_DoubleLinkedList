@@ -13,7 +13,7 @@ struct Node
 Node *START = NULL;
 
 void addNode() {
-    Node* newNode = new Node();
+    Node* newNode = new Node(); // step 1: create a new mode
     cout << "\nEnter the roll number of the student: ";
     cin >> newNode->noMhs;
     cout << "nEnter the name of the student: ";
@@ -25,6 +25,18 @@ void addNode() {
             cout << "\033[31mDuplicate roll numbers not allowed\033[0m" << endl;
             return;
         }
+
+        newNode->next = START;
+        if (START != NULL) {
+            START->prev = newNode;
+        }
+        newNode->prev = NULL;
+        START = newNode;
+    }
+    else {
+
+        Node* current = START;
+        Node* previous = NULL;
     }
 }
 
