@@ -6,67 +6,64 @@ struct Node
 {
     int noMhs;
     string name;
-    Node *next;
+    Node* next;
     Node* prev;
 };
 
-Node *START = NULL;
+Node* START = NULL;
 
 void addNode() {
-    Node* newNode = new Node(); // step 1: create a new mode
-    cout << "\nEnter the roll number of the student: ";
-    cin >> newNode->noMhs;
-    cout << "nEnter the name of the student: ";
-    cin >> newNode->name;
+    Node* newNode = new Node(); // STEP 1: create a new node
+    cout << "\nEnter the roll number of student: ";
+    cin >> newNode->noMhs;      // assign value to the data field of the new node
+    cout << "\nEnter the name of the student: ";
+    cin >> newNode->name;       // Assign value to the data field of the new node
 
-    if (START == NULL || newNode->noMhs <= START->noMhs) {
+    // Insert the new node in the list
+    if (START == NULL || newNode->noMhs <= START->noMhs) { // STEP 2: insert the new node
 
         if (START != NULL && newNode->noMhs == START->noMhs) {
-            cout << "\033[31mDuplicate roll numbers not allowed\033[0m" << endl;
+            cout << "\033[31mDuplicate roll not allowed\033[0m" << endl;
             return;
         }
-
-        newNode->next = START;
+        // If the list is empty, make the new node the START
+        newNode->next = START;  //STEP 3: make the new node point to the first node
         if (START != NULL) {
-            START->prev = newNode;
+            START->prev = newNode;  //STEP 4: make the first node point to the new node
         }
-        newNode->prev = NULL;
-        START = newNode;
+        newNode->prev = NULL;       //STEP 5: make the new node point to NULL
+        START = newNode;            //STEP 6: make the new node the first node
     }
     else {
+        // insert the new node in the middle or at the end
+        Node* current = START; // STEP 1.a: start from the first
+        Node* previous = NULL; // STEP 1.b: previous node is NULL initially
 
-        Node* current = START;
-        Node* previous = NULL;
-
-
-        while (current != NULL && current->noMhs < newNode->noMhs) {
-            previous = current;
-            current = current->next;
+        while (current != NULL && current->noMhs < newNode->noMhs) { // STEP 1.c: traver
+            previous = current; // STEP 1.d: move the previous to the current Node
+            current = current->next; // STEP 1.e: move the current to the next node
         }
 
-        newNode->next = current;
-        newNode->prev = previous;
+        newNode->next = current; // STEP 4: Make the next field of the new node point to current
+        newNode->prev = previous; // STEP 5: Make the previous field of the new node point to previous
 
-        if (current != NULL ) {
-            current->prev = newNode; 
+        if (current != NULL) {
+            current->prev = newNode; // STEP 6: Make the previous field of the current
         }
 
         if (previous != NULL) {
-            previous->next = newNode;
+            previous->next = newNode; // STEP 7 : make the next field of the previous node
         }
         else {
-
+            //If previous is still NULL, it means newNode is now the first node
             START = newNode;
         }
     }
-
-
 }
+
 
 
 int main()
 {
-    
+
 }
-
-
